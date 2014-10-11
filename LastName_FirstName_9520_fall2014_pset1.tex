@@ -10,7 +10,7 @@
 
 
 % Insert your name here!
-\scribe{John Doe}
+\scribe{Brando Miranda}
 
 \begin{document}
 
@@ -18,7 +18,26 @@
 \maketitle
 
 \paragraph{Problem 1}
-Please write your analysis on Problem 1 here
+
+To check that the square loss function can be written as $\mathcal{L}(-yf(x))$ lets expand $\|f(x) - y\|^2$:
+
+$$(1-yf(x))^2 = (1 - 2yf(x) + f(x)^2)$$
+
+but $y^2 = 1$ thus:
+
+$$\mathcal{L}(-yf(x)) = (1 - 2yf(x) + (yf(x))^2)$$
+
+To find the minimizer c(x) we need to minimize: 
+
+$$\mathbb{E}_{x,y}[(1-yf(x))^2]$$
+
+and specify the function that achieves this minimum. Lets find it by taking the derivative of the above wrt to f(x) and setting it to zero:
+
+$$\frac{d}{df(x)}\mathbb{E}_{x}\mathbb{E}_{y|x}[(1-yf(x))^2] = \mathbb{E}_{x}\frac{d}{df(x)}{E}_{y|x}[(1-yf(x))^2]$$
+
+which can be minimized by finding the minimum of $\frac{d}{df(x)}{E}_{y|x}[(1-yf(x))^2]$:
+
+$$ \frac{d}{df(x)}{E}_{y|x}[(1-yf(x))^2] =  {E}_{y|x} \left[ \frac{d}{df(x)}(1-yf(x))^2 \right]$$
 
 
 \paragraph{Problem 2}
