@@ -19,7 +19,17 @@
 
 \paragraph{Problem 1}
 
-To check that the square loss function can be written as $\mathcal{L}(-yf(x))$ lets expand $\|f(x) - y\|^2$:
+\paragraph{Problem 2}
+Please write your analysis on Problem 2 here
+
+
+
+\paragraph{Problem 3}
+Please write your analysis on Problem 3 here
+
+
+\paragraph{Problem 4}
+a) To check that the square loss function can be written as $\mathcal{L}(-yf(x))$ lets expand $\|f(x) - y\|^2$:
 
 $$(y-f(x))^2 = (1 - 2yf(x) + f(x)^2)$$
 
@@ -53,17 +63,31 @@ Since $p_{y|x}(1|x) + p_{y|x}(-1|x) = 1$ then:
 
 $$2p_{y|x}(1|x) - 1 = f(x)\mathbb{E}_{y|x}[1] $$
 
-\paragraph{Problem 2}
-Please write your analysis on Problem 2 here
+b) We want to solve:
 
+$$f^{*}(x) =  argmin_{f(x)} \mathbb{E}_{x,y}[e^{-yf(x)}]$$
 
+$$\frac{d}{df(x)}\mathbb{E}_{x}\mathbb{E}_{y|x} [e^{-yf(x)}] = 0 $$
 
-\paragraph{Problem 3}
-Please write your analysis on Problem 3 here
+Similar reasoning as the previous question we have:
 
+$$\mathbb{E}_{y|x} \left[ \frac{d}{df(x)}e^{-yf(x)} \right] = 0 $$
 
-\paragraph{Problem 4}
-a)
+$$\sum_{y \in \{1, -1 \}}p_{y|x}(y|x)ye^{-yf(x)} = p_{y|x}(1|x)e^{-f(x)} - p_{y|x}(-1|x)e^{f(x)}$$
+
+$$p_{y|x}(1|x) - p_{y|x}(-1|x)e^{2f(x)} = 0$$
+
+$$p_{y|x}(1|x) = p_{y|x}(-1|x)e^{2f(x)}$$
+
+$$\frac{p_{y|x}(1|x)}{p_{y|x}(-1|x)} = e^{2f(x)}$$
+
+$$\frac{p_{y|x}(1|x)}{p_{y|x}(-1|x)} = e^{2f(x)}$$
+
+$$\frac{1}{2}log\left( \frac{p_{y|x}(1|x)}{p_{y|x}(-1|x)} \right) = f(x)$$
+
+or 
+
+$$\frac{1}{2}log\left( \frac{p_{y|x}(1|x)}{1 - p_{y|x}(1|x)} \right) = f(x)$$
 
 
 
