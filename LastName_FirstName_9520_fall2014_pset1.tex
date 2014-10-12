@@ -44,12 +44,12 @@ $$d(\Phi(x), \Phi(x')) =  d_{k}(x, x') = \sqrt{ K(x,x) + K(x',x') - 2K(x,x')  }$
 
 Which is only a function of the input vector $x$ and does not need the explicit representation of the feature map $\Phi(x)$
 
-b) Let $x_+$ denote the $n_+$ data points with positive label $y = +1$ and similar for $x_-$ for points with negative labels.
+b) Let $x_+$ denote the $n_+$ data points with positive label $y = +1$ and $X_+$ the set containing them. Similarly, define $x_-$ and $X_-$.
 
-$$d(\Phi(x), \sum_{x_+ s.t. y_i = +1}\Phi(x_+)) = \sqrt{ \langle \Phi(x'),  \sum_{x_+ s.t. y = +1}\Phi(x_+) \rangle }$$
+$$d(\Phi(x), \sum_{x_+ \in X_+}\Phi(x_+)) = \sqrt{ \langle \Phi(x) -  \sum_{x_+ \in X_+}\Phi(x_+),   \Phi(x) - \sum_{x_+  \in X_+}\Phi(x_+) \rangle }$$
 
-by linearity and symmetry of inner product we get:
- $$\sqrt{  \sum_{x_+ s.t. y = +1}\langle \Phi(x'),  \Phi(x_+) \rangle }$$
+by linearity and symmetry of inner products we get:
+ $$\sqrt{ \langle \Phi(x), \Phi(x) \rangle - \sum_{x_+ \in X_+} 2\langle \Phi(x), \Phi(x_+) \rangle - \sum_{x_+ \in X_+} \sum_{x_+' \in X_+}  \langle  \Phi(x_+') , \Phi(x_+) \rangle       }$$
 
 
 \paragraph{Problem 4}
