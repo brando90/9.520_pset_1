@@ -44,13 +44,17 @@ $$d(\Phi(x), \Phi(x')) =  d_{k}(x, x') = \sqrt{ K(x,x) + K(x',x') - 2K(x,x')  }$
 
 Which is only a function of the input vector $x$ and does not need the explicit representation of the feature map $\Phi(x)$
 
-b) Let $x_+$ denote the $n_+$ data points with positive label $y = +1$ and $X_+$ the set containing them. Similarly, define $x_-$ and $X_-$.
+%%%%%%% PART B
+b) Let $x_+$ denote positively label $y = +1$, $X_+$ the set containing them and $ \mu_{I_+} =  \frac{1}{n_+}\sum_{x_+ \in X_+} \Phi(x) $. Similarly, define $x_-$, $X_-$ and $ \mu_{I_-}$.
 
-$$d(\Phi(x), \sum_{x_+ \in X_+}\Phi(x_+)) = \sqrt{ \langle \Phi(x) -  \sum_{x_+ \in X_+}\Phi(x_+),   \Phi(x) - \sum_{x_+  \in X_+}\Phi(x_+) \rangle }$$
+$$d(\Phi(x),  \mu_{I_+}) = \sqrt{ \langle \Phi(x) -  \frac{1}{n_+}\sum_{x_+ \in X_+}\Phi(x_+),   \Phi(x) - \frac{1}{n_+}\sum_{x_+  \in X_+}\Phi(x_+) \rangle }$$
 
 by linearity and symmetry of inner products we get:
- $$\sqrt{ \langle \Phi(x), \Phi(x) \rangle - \sum_{x_+ \in X_+} 2\langle \Phi(x), \Phi(x_+) \rangle - \sum_{x_+ \in X_+} \sum_{x_+' \in X_+}  \langle  \Phi(x_+') , \Phi(x_+) \rangle       }$$
-
+ $$\sqrt{ \langle \Phi(x), \Phi(x) \rangle - \frac{1}{n_+} \sum_{x_+ \in X_+} 2\langle \Phi(x), \Phi(x_+) \rangle - \frac{1}{n_+^2}\sum_{x_+ \in X_+} \sum_{x_+' \in X_+}  \langle  \Phi(x_+') , \Phi(x_+) \rangle       }$$
+ 
+by the reproducing property of the kernel K we know $K(x,x) = \langle K_x, K_x \rangle =\langle \Phi(x), \Phi(x) \rangle$:
+ 
+$$ d(x, \mu_+) = \sqrt{ K(x,x) - \frac{1}{n_+} \sum_{x_+ \in X_+} 2K(x, x_+) - \frac{1}{n_+^2} \sum_{x_+ \in X_+} \sum_{x_+' \in X_+}  K(x_+', x_+)       }$$
 
 \paragraph{Problem 4}
 a) To check that the square loss function can be written as $\mathcal{L}(-yf(x))$ lets expand $\|f(x) - y\|^2$:
@@ -105,8 +109,6 @@ $$p_{y|x}(1|x) = p_{y|x}(-1|x)e^{2f(x)}$$
 
 $$\frac{p_{y|x}(1|x)}{p_{y|x}(-1|x)} = e^{2f(x)}$$
 
-$$\frac{p_{y|x}(1|x)}{p_{y|x}(-1|x)} = e^{2f(x)}$$
-
 $$\frac{1}{2}log\left( \frac{p_{y|x}(1|x)}{p_{y|x}(-1|x)} \right) = f(x)$$
 
 or 
@@ -126,10 +128,6 @@ $$\mathcal{L}(-yf(x)) = (h(g(e^{-yf(x)}))$$
 From part b) we notice that its just a composite function of the exponential loss function using two monotonic functions. So without the need of further calculations its clear that the minimizer is the same as part b:
 
 $$\frac{1}{2}log\left( \frac{p_{y|x}(1|x)}{p_{y|x}(-1|x)} \right) = f(x)$$
-
-or 
-
-$$\frac{1}{2}log\left( \frac{p_{y|x}(1|x)}{1 - p_{y|x}(1|x)} \right) = f(x)$$
 
 d) Bayes decision rule is:
 
