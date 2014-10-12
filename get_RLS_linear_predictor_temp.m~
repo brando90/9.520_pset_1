@@ -1,0 +1,27 @@
+function [ w, lambda ] = get_RLS_linear_predictor(Xtrain, Ytrain, lower, upper, step, k)
+%Returns the corresponding predictor w from RLS
+% 
+
+lambdas = [lower: step: upper];
+[n d] = size(Xtrain);
+for lambda = lambdas
+    %w = inv(Xtrain'*Xtrain + lambda*n*I)*(Xtrain'*Ytrain);
+    validation_step = n/k;
+    indices = [1:validation_step:n];
+    for i = indices
+        if i == 1
+            X_cv = X_train(i:i+validation_step - 1);
+            X_cv_train = X_train(i+validation_step:n);
+        elseif i == n - validation_step + 1
+            X_cv = X_train(i:i+validation_step - 1);
+            X_cv_train = X_train(i+validation_step:n);
+        else
+            X_cv = X_train(i:i+validation_step - 1);
+            X_cv_train = X_train(i+validation_step:n);
+        end
+    end
+    
+end
+
+end
+
