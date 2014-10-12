@@ -34,7 +34,7 @@ by linearity and symmetry of the inner product:
 
 $$\sqrt{ \langle \Phi(x), \Phi(x) \rangle -  2\langle \Phi(x), \Phi(x') \rangle + \langle \Phi(x'), \Phi(x') \rangle}$$
 
-by the reproducing property of the kernel K we know $K(x,x) = \langle K_x, K_x \rangle =\langle \Phi(x), \Phi(x) \rangle$. Thus:
+by the reproducing property of the kernel K we know $K(x,x) = \langle K_x, K_x \rangle =\langle \Phi(x), \Phi(x) \rangle$:
 
 $$\sqrt{ K(x,x) + K(x',x') - 2K(x,x')  }$$
 
@@ -45,7 +45,7 @@ $$d(\Phi(x), \Phi(x')) =  d_{k}(x, x') = \sqrt{ K(x,x) + K(x',x') - 2K(x,x')  }$
 Which is only a function of the input vector $x$ and does not need the explicit representation of the feature map $\Phi(x)$
 
 %%%%%%% PART B
-b) Let $x_+$ denote positively label $y = +1$, $X_+$ the set containing them and $ \mu_{I_+} =  \frac{1}{n_+}\sum_{x_+ \in X_+} \Phi(x) $. Similarly, define $x_-$, $X_-$ and $ \mu_{I_-}$.
+b) Let $x_+$ denote positively label $y = +1$, $X_+$ the set containing them and $ \mu_{I_+} =  \frac{1}{n_+}\sum_{x_+ \in X_+} \Phi(x) $. Similarly, define $x_-$, $X_-$ and $ \mu_{I_-}$. Let the average distance in the feature space be:
 
 $$d(\Phi(x),  \mu_{I_+}) = \sqrt{ \langle \Phi(x) -  \frac{1}{n_+}\sum_{x_+ \in X_+}\Phi(x_+),   \Phi(x) - \frac{1}{n_+}\sum_{x_+  \in X_+}\Phi(x_+) \rangle }$$
 
@@ -56,11 +56,13 @@ by the reproducing property of the kernel K we know $K(x,x) = \langle K_x, K_x \
  
 $$ d(x, \mu_+) = \sqrt{ K(x,x) - \frac{1}{n_+} \sum_{x_+ \in X_+} 2K(x, x_+) - \frac{1}{n_+^2} \sum_{x_+ \in X_+} \sum_{x_+' \in X_+}  K(x_+', x_+)       }$$
 
-the classifier in terms of the sign function and kernel products is then:
+Therefore, I will use the previous distance function in the feature space $ d(x, \mu_+)$ to express the classifier in terms of the distance to the mean.
 
-$$c(x) = sign(d(x, \mu_-) - d(x, \mu_+) $$
+The classifier in terms of the sign function and kernel products is then:
 
-since $d(x, \mu_-)$ is only in terms of kernel products as expressed above, this is the classifier.
+$$c(x) = sign(d(x, \mu_-) - d(x, \mu_+))$$
+
+since $d(x, \mu_-)$ is only in terms of kernel products as expressed above, this is the classifier. The above equation tries to capture the intuition "choose the sign of whichever mean of the feature space you are closest to."
 
 \paragraph{Problem 4}
 a) To check that the square loss function can be written as $\mathcal{L}(-yf(x))$ lets expand $\|f(x) - y\|^2$:
