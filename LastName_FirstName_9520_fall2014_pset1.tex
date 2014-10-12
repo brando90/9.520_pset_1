@@ -107,7 +107,25 @@ or
 
 $$\frac{1}{2}log\left( \frac{p_{y|x}(1|x)}{1 - p_{y|x}(1|x)} \right) = f(x)$$
 
+d) Bayes decision rule is:
 
+$$ b(x) = sign(2p_{y|x}(1|x) -1)$$
+
+From part a, b and c we have $f(x)$ expressed in terms of $p_{y|x}(1|x)$. Thus, we can just re-arrange those equations and make $p_{y|x}(1|x)$ the subject and therefore, express $p_{y|x}(1|x)$ as a function of $f(x)$. Then we can obviously plug them back to $b(x)$ that is a function of $p_{y|x}(1|x)$. To not bore you with the simple algebra I will just express the answers.
+
+For part a) we have:
+
+$$p_{y|x}(1|x) = \frac{f(x) + 1}{2}$$
+
+So the relation of the minimizer of the squared loss function to Bayes decision rule is:
+
+$$b(x) = sign(2\left( \frac{f(x) + 1}{2} \right) -1 ) = sign(f(x)) $$
+
+Since b) and c) have the same minimizer, then their relation to Bayes decision rule is the same. First lets express $p_{y|x}(1|x)$ interns of f(x):
+
+$$p(1|x) = \frac{1}{1+e^{-f(x)} }$$
+
+$$ b(x) = sign \left( \frac{2}{1+e^{-f(x)}}   - 1 \right)$$
 
 \paragraph{Problem 5 (MATLAB)}
 Please write your analysis on Problem 5 here
