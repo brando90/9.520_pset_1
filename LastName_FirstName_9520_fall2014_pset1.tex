@@ -56,6 +56,12 @@ by the reproducing property of the kernel K we know $K(x,x) = \langle K_x, K_x \
  
 $$ d(x, \mu_+) = \sqrt{ K(x,x) - \frac{1}{n_+} \sum_{x_+ \in X_+} 2K(x, x_+) - \frac{1}{n_+^2} \sum_{x_+ \in X_+} \sum_{x_+' \in X_+}  K(x_+', x_+)       }$$
 
+the classifier in terms of the sign function and kernel products is then:
+
+$$c(x) = sign(d(x, \mu_-) - d(x, \mu_+) $$
+
+since $d(x, \mu_-)$ is only in terms of kernel products as expressed above, this is the classifier.
+
 \paragraph{Problem 4}
 a) To check that the square loss function can be written as $\mathcal{L}(-yf(x))$ lets expand $\|f(x) - y\|^2$:
 
