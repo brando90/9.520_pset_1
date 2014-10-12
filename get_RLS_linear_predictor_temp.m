@@ -26,22 +26,20 @@ function [w, error] = getKCVError(X_train, Y_train, lambda, k)
         else
             X_cv = X_train(i:i+validation_step - 1);
             X_cv_train1 = X_train(1:i-1);
-            Y_cv_train2 = Y_train(i+validation_step:n);
-            Y_cv_train = [Y_cv_train1 X_cv_train2];
+            X_cv_train2 = X_train(i+validation_step:n);
+            X_cv_train = [X_cv_train1 X_cv_train2];
             
             Y_cv = Y_train(i:i+validation_step - 1);
             Y_cv_train1 = Y_train(1:i-1);
             Y_cv_train2 = Y_train(i+validation_step:n);
             Y_cv_train = [Y_cv_train1 Y_cv_train2];
         end
-        %train
-        w = inv(X_cv_train'*X_cv_train + lambda*n*I)*(X_cv_train'*Ytrain);
-        %A\b === inv(A)*b
-        %w = (X_cv_train'*Ytrain)\(X_cv_train'*X_cv_train + lambda*n*I);
+        w = trainRLS(X_cv_train, Y_cv_train, lambda);
+        
     end
 end
 
-function [w] = train(X_train, Y_train, lambda)
+function [w] = trainRLS(X_train, Y_train, lambda)
     %w = inv(X_cv_train'*X_cv_train + lambda*n*I)*(X_cv_train'*Ytrain); %A\b === inv(A)*b
     w = (X_train'*X_train + lambda*n*I)\(X_train'*Y_train);
 end 
