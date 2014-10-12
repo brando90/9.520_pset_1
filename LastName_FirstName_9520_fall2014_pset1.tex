@@ -38,6 +38,20 @@ by the reproducing property of the kernel K we know $K(x,x) = \langle K_x, K_x \
 
 $$\sqrt{ K(x,x) + K(x',x') - 2K(x,x')  }$$
 
+Thus:
+
+$$d(\Phi(x), \Phi(x')) =  d_{k}(x, x') = \sqrt{ K(x,x) + K(x',x') - 2K(x,x')  }$$
+
+Which is only a function of the input vector $x$ and does not need the explicit representation of the feature map $\Phi(x)$
+
+b) Let $x_+$ denote the $n_+$ data points with positive label $y = +1$ and similar for $x_-$ for points with negative labels.
+
+$$d(\Phi(x), \sum_{x_+ s.t. y_i = +1}\Phi(x_+)) = \sqrt{ \langle \Phi(x'),  \sum_{x_+ s.t. y = +1}\Phi(x_+) \rangle }$$
+
+by linearity and symmetry of inner product we get:
+ $$\sqrt{  \sum_{x_+ s.t. y = +1}\langle \Phi(x'),  \Phi(x_+) \rangle }$$
+
+
 \paragraph{Problem 4}
 a) To check that the square loss function can be written as $\mathcal{L}(-yf(x))$ lets expand $\|f(x) - y\|^2$:
 
@@ -67,11 +81,11 @@ $$\mathbb{E}_{y|x}[y] = f(x)\mathbb{E}_{y|x}[1] $$
 
 $$\mathbb{E}_{y|x}[y] = f(x) $$
 
-$$p_{y|x}(1|x) - p_{y|x}(-1|x) = f(x)\mathbb{E}_{y|x}[1] $$
+$$p_{y|x}(1|x) - p_{y|x}(-1|x) = f(x)$$
 
 Since $p_{y|x}(1|x) + p_{y|x}(-1|x) = 1$ then:
 
-$$2p_{y|x}(1|x) - 1 = f(x)\mathbb{E}_{y|x}[1] $$
+$$2p_{y|x}(1|x) - 1 = f(x) $$
 
 b) We want to solve:
 
