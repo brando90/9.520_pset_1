@@ -89,12 +89,24 @@ or
 
 $$\frac{1}{2}log\left( \frac{p_{y|x}(1|x)}{1 - p_{y|x}(1|x)} \right) = f(x)$$
 
+c) When we apply a function that is monotonic to another function, then the value that minimizes it does not change. Said differently, if we have a function that preserves monotonicity (and thus preserves order), then the minimizer does not change. i.e. if $f(x) < f(y)$ and $g(x)$ is monotonic then $ g( f(x) ) < g( f(y) )$ and because of that the value of x that minimized $f(x)$ also minimizes $g(f(x))$.
 
-c)
+The function $g(x) = x + 1$ is clearly monotonic. So is the function $h(x) = log(x)$. Now consider the following function:
 
-With the logistic loss f(x) is:
+$$h(g(e^{-yf(x)})) = log(g( e^{-yf(x)} )) = log(1 + e^{-yf(x)})$$
 
-$$f(x) = log \left( \frac\right)$$
+This time we are trying to minimize:
+
+$$\mathcal{L}(-yf(x)) = (h(g(e^{-yf(x)}))$$
+
+From part b) we notice that its just a composite function of the exponential loss function using two monotonic functions. So without the need of further calculations its clear that the minimizer is the same as part b:
+
+$$\frac{1}{2}log\left( \frac{p_{y|x}(1|x)}{p_{y|x}(-1|x)} \right) = f(x)$$
+
+or 
+
+$$\frac{1}{2}log\left( \frac{p_{y|x}(1|x)}{1 - p_{y|x}(1|x)} \right) = f(x)$$
+
 
 
 \paragraph{Problem 5 (MATLAB)}
