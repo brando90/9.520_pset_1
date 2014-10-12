@@ -25,13 +25,23 @@ Please write your analysis on Problem 2 here
 
 
 \paragraph{Problem 3}
-Please write your analysis on Problem 3 here
 
+a) We want to show that $d(\Phi(x), \Phi(x')) = d_{k}(x, x') $.
+
+$$d(\Phi(x), \Phi(x')) = || \Phi(x) - \Phi(x')|| = \sqrt{ \langle \Phi(x) - \Phi(x'), \Phi(x) - \Phi(x') \rangle}$$
+
+by linearity and symmetry of the inner product:
+
+$$\sqrt{ \langle \Phi(x), \Phi(x) \rangle -  2\langle \Phi(x), \Phi(x') \rangle + \langle \Phi(x'), \Phi(x') \rangle}$$
+
+by the reproducing property of the kernel K we know $K(x,x) = \langle K_x, K_x \rangle =\langle \Phi(x), \Phi(x) \rangle$. Thus:
+
+$$\sqrt{ K(x,x) + K(x',x') - 2K(x,x')  }$$
 
 \paragraph{Problem 4}
 a) To check that the square loss function can be written as $\mathcal{L}(-yf(x))$ lets expand $\|f(x) - y\|^2$:
 
-$$(y-f(x))^2 = (1 - 2yf(x) + f(x)^2)$$
+$$(y-f(x))^2 = (1 - 2yf(x) + f(x)^2) $$
 
 but $y^2 = 1$ thus:
 
