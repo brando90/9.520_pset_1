@@ -61,7 +61,7 @@ $$b= \bar{y} -((X^c)^TX^c + \lambda n I)^{-1}(X^c)^TY^c)^T \bar{x}$$
 
 Lets try to express the minimization problem in terms of matrices:
 
-$$min_{w \in \mathbb{R}^d}\sum_{i=1}^{n}( \gamma_i \langle w, x_i\rangle_{\mathbb{R}^d} +b - y_i)^2 + \lambda ||w||_{\mathbb{R}^d}^2$$
+$$min_{w \in \mathbb{R}^d} \frac{1}{n} \sum_{i=1}^{n}( \gamma_i \langle w, x_i\rangle_{\mathbb{R}^d} +b - y_i)^2 + \lambda ||w||_{\mathbb{R}^d}^2$$
 
 Let 
 
@@ -70,6 +70,8 @@ Let
 0 & \gamma_2 & 0 & 0 \\
 0 & 0 & \ddots & \vdots \\
 0 & 0 & \cdots & \gamma_n \end{array} \right)\] 
+
+and lets try to re-write the minimization problem in terms of the above gamma matrix:
 
 $$(\hat{\gamma} (Xw - Y)) \cdot (Xw - Y) + \lambda||w||_{\mathbb{R}^d}^2$$
 
@@ -88,8 +90,20 @@ By applying linearity of the inner product we get:
 
 $$\langle \hat{\gamma} Xw - \hat{\gamma} Y , Xw - Y \rangle_{\mathbb{R}^n}   = \langle \hat{\gamma} Xw, Xw \rangle_{\mathbb{R}^n} - \langle \hat{\gamma} Xw, Y \rangle_{\mathbb{R}^n}  -\langle  \hat{\gamma} Y, Xw \rangle_{\mathbb{R}^n} + \langle \hat{\gamma} Y, Y  \rangle_{\mathbb{R}^n} $$
 
-$$  \bigtriangledown_w ( (\hat{\gamma} Xw)^T Xw -  (\hat{\gamma} Xw)^T Y  - Y^T Xw + Y^T Y + \lambda ||w||_{\mathbb{R}^d} ^2  $$
+$$  \bigtriangledown_w ( (\hat{\gamma} Xw)^T Xw -  (\hat{\gamma} Xw)^T Y  - Y^T  \hat{\gamma}  Xw + ( \hat{\gamma} Y)^T Y + \lambda n ||w||_{\mathbb{R}^d} ^2)  = 0$$
 
+$$ 2 X^T \hat{\gamma} Xw -  X^T \hat{\gamma} Y  -Y^T  \hat{\gamma}  X  + 2 \lambda nw = 0 $$
+
+$$ X^T \hat{\gamma} Xw + \lambda nw = Y^T  \hat{\gamma}  X $$
+
+$$ (X^T \hat{\gamma} X + \lambda nI)w = Y^T  \hat{\gamma}  X $$
+
+$$ w^* = (X^T \hat{\gamma} X + \lambda nI)^{-1}Y^T  \hat{\gamma}  X $$
+
+b)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Problem 3
 \paragraph{Problem 3}
 
 a) We want to show that $d(\Phi(x), \Phi(x')) = d_{k}(x, x') $.
