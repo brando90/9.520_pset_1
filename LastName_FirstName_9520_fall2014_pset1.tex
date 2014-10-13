@@ -56,10 +56,39 @@ $$b= \bar{y} -\langle ((X^c)^TX^c + \lambda n I)^{-1}(X^c)^TY^c, \bar{x} \rangle
 
 $$b= \bar{y} -((X^c)^TX^c + \lambda n I)^{-1}(X^c)^TY^c)^T \bar{x}$$
 
+%%%%%%%%%%%%%%%%% PROBLEM 2
 \paragraph{Problem 2}
-Please write your analysis on Problem 2 here
 
+Lets try to express the minimization problem in terms of matrices:
 
+$$min_{w \in \mathbb{R}^d}\sum_{i=1}^{n}( \gamma_i \langle w, x_i\rangle_{\mathbb{R}^d} +b - y_i)^2 + \lambda ||w||_{\mathbb{R}^d}^2$$
+
+Let 
+
+\[ \hat{\gamma} = \left( \begin{array}{cccc}
+\gamma_1 & 0 & 0 & 0 \\
+0 & \gamma_2 & 0 & 0 \\
+0 & 0 & \ddots & \vdots \\
+0 & 0 & \cdots & \gamma_n \end{array} \right)\] 
+
+$$(\hat{\gamma} (Xw - Y)) \cdot (Xw - Y) + \lambda||w||_{\mathbb{R}^d}^2$$
+
+$$(\hat{\gamma} (Xw - Y))^T (Xw - Y) + \lambda||w||_{\mathbb{R}^d}^2$$
+
+$$\langle \hat{\gamma} (Xw - Y), Xw - Y\rangle_{\mathbb{R}^n} + \lambda||w||_{\mathbb{R}^d}^2$$
+
+Lets try to minimize it now by taking the gradient wrt w:
+$$ \bigtriangledown_w  \left( \langle \hat{\gamma} (Xw - Y), Xw - Y\rangle_{\mathbb{R}^n} + \lambda||w||_{\mathbb{R}^d}^2 \right) = 0$$
+
+Lets handle the inner product first:
+
+$$ \bigtriangledown_w  \left( \langle \hat{\gamma} (Xw - Y), Xw - Y\rangle_{\mathbb{R}^n} \right)$$
+
+By applying linearity of the inner product we get:
+
+$$\langle \hat{\gamma} Xw - \hat{\gamma} Y , Xw - Y \rangle_{\mathbb{R}^n}   = \langle \hat{\gamma} Xw, Xw \rangle_{\mathbb{R}^n} - \langle \hat{\gamma} Xw, Y \rangle_{\mathbb{R}^n}  -\langle  \hat{\gamma} Y, Xw \rangle_{\mathbb{R}^n} + \langle \hat{\gamma} Y, Y  \rangle_{\mathbb{R}^n} $$
+
+$$  \bigtriangledown_w ( (\hat{\gamma} Xw)^T Xw -  (\hat{\gamma} Xw)^T Y  - Y^T Xw + Y^T Y + \lambda ||w||_{\mathbb{R}^d} ^2  $$
 
 \paragraph{Problem 3}
 
