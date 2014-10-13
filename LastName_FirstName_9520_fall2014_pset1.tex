@@ -19,6 +19,43 @@
 
 \paragraph{Problem 1}
 
+The optimal solution to the Tikhonov regularization with offset (but not penalized) and linear kernel must satisfy the following constraints for minimization/optimality:
+
+$$\frac{d}{db}\frac{1}{n}\sum_{i=1}^{n}(\langle w, x_i\rangle_{\mathbb{R}^d} +b - y_i)^2 + \lambda ||w||_{\mathbb{R}^d}^2 = 0$$
+
+$$b= \frac{1}{n}\sum^{n}_{i=1} (y_i -\langle w, x_i\rangle_{\mathbb{R}^d}) = \frac{1}{n}\sum^{n}_{i=1} y_i -\langle w, \frac{1}{n}\sum^{n}_{i=1}x_i\rangle_{\mathbb{R}^d}$$
+
+let $\bar{x} = \frac{1}{n}\sum^{n}_{i=1}x_i$ and $\bar{y} = \frac{1}{n}\sum^{n}_{i=1}y_i$ then $b$:
+
+$$b= \bar{y} -\langle w, \bar{x} \rangle_{\mathbb{R}^d}$$
+
+If the above must be satisfy, then we can just "remove" the dependence of the offset b, of the original minimization by substituting the above value of b. That leads to the following:
+
+$$min_{w \in \mathbb{R}^d}\{ \frac{1}{n}( \langle w, x_i\rangle_{\mathbb{R}^d} +   \bar{y} -\langle w, \bar{x} \rangle_{\mathbb{R}^d} - y_i)^2 +  \lambda ||w||_{\mathbb{R}^d}^2)\}$$
+
+by using linearity of the inner product and re-arranging the y terms, we get the following expression:
+
+$$min_{w \in \mathbb{R}^d}\{ \frac{1}{n}( \langle w, x_i - \bar{x} \rangle_{\mathbb{R}^d} -   (y_i - \bar{y}))^2 +  \lambda ||w||_{\mathbb{R}^d}^2)\}$$
+
+$$min_{w \in \mathbb{R}^d}\{ \frac{1}{n}( \langle w, x_i^c \rangle_{\mathbb{R}^d} -   y_i^c)^2 +  \lambda ||w||_{\mathbb{R}^d}^2)\}$$
+
+Which if we just substitute the definitions of $x_i^c$ and $y_i^c$, we notice that it is the same minimization problem as with centered data! Thus, the solution for $w^*$ for the original problem with unpenalized offset, is the same as when the data is centered. QED. 
+\\
+
+Let $X^c$ be defined as the data matrix but with the centered data as the rows, instead of the input data. Similarly define $Y^c$. Then we can express $w^*$ in terms of $X^c$ and $Y^c$
+
+$$w^* = ((X^c)^TX^c + \lambda n I)^{-1}(X^c)^TY^c$$
+
+Which we can then plug back in to out original formulation for $b$ from the beginning yields:
+
+$$b= \bar{y} -\langle w^*, \bar{x} \rangle_{\mathbb{R}^d}$$
+
+We can do this because the optimal value for $w^*$ must also satisfy that the derivative wrt b is zero (which is the same as the above equation for b).
+
+$$b= \bar{y} -\langle ((X^c)^TX^c + \lambda n I)^{-1}(X^c)^TY^c, \bar{x} \rangle_{\mathbb{R}^d}$$
+
+$$b= \bar{y} -((X^c)^TX^c + \lambda n I)^{-1}(X^c)^TY^c)^T \bar{x}$$
+
 \paragraph{Problem 2}
 Please write your analysis on Problem 2 here
 
