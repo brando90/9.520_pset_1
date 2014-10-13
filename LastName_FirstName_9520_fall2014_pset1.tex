@@ -61,7 +61,7 @@ $$b= \bar{y} -((X^c)^TX^c + \lambda n I)^{-1}(X^c)^TY^c)^T \bar{x}$$
 
 Lets try to express the minimization problem in terms of matrices:
 
-$$min_{w \in \mathbb{R}^d} \frac{1}{n} \sum_{i=1}^{n}( \gamma_i \langle w, x_i\rangle_{\mathbb{R}^d} +b - y_i)^2 + \lambda ||w||_{\mathbb{R}^d}^2$$
+$$min_{w \in \mathbb{R}^d} \sum_{i=1}^{n} \gamma_i ( \langle w, x_i\rangle_{\mathbb{R}^d} - y_i)^2 + \lambda ||w||_{\mathbb{R}^d}^2$$
 
 Let 
 
@@ -90,18 +90,37 @@ By applying linearity of the inner product we get:
 
 $$\langle \hat{\gamma} Xw - \hat{\gamma} Y , Xw - Y \rangle_{\mathbb{R}^n}   = \langle \hat{\gamma} Xw, Xw \rangle_{\mathbb{R}^n} - \langle \hat{\gamma} Xw, Y \rangle_{\mathbb{R}^n}  -\langle  \hat{\gamma} Y, Xw \rangle_{\mathbb{R}^n} + \langle \hat{\gamma} Y, Y  \rangle_{\mathbb{R}^n} $$
 
-$$  \bigtriangledown_w ( (\hat{\gamma} Xw)^T Xw -  (\hat{\gamma} Xw)^T Y  - Y^T  \hat{\gamma}  Xw + ( \hat{\gamma} Y)^T Y + \lambda n ||w||_{\mathbb{R}^d} ^2)  = 0$$
+$$  \bigtriangledown_w ( (\hat{\gamma} Xw)^T Xw -  (\hat{\gamma} Xw)^T Y  - Y^T  \hat{\gamma}  Xw + ( \hat{\gamma} Y)^T Y + \lambda ||w||_{\mathbb{R}^d} ^2)  = 0$$
 
-$$ 2 X^T \hat{\gamma} Xw -  X^T \hat{\gamma} Y  -Y^T  \hat{\gamma}  X  + 2 \lambda nw = 0 $$
+$$ 2 X^T \hat{\gamma} Xw -  X^T \hat{\gamma} Y  -Y^T  \hat{\gamma}  X  + 2 \lambda w = 0 $$
 
-$$ X^T \hat{\gamma} Xw + \lambda nw = Y^T  \hat{\gamma}  X $$
+$$ X^T \hat{\gamma} Xw + \lambda w = Y^T  \hat{\gamma}  X $$
 
-$$ (X^T \hat{\gamma} X + \lambda nI)w = Y^T  \hat{\gamma}  X $$
+$$ (X^T \hat{\gamma} X + \lambda I)w = Y^T  \hat{\gamma}  X $$
 
-$$ w^* = (X^T \hat{\gamma} X + \lambda nI)^{-1}Y^T  \hat{\gamma}  X $$
+$$ w^* = (X^T \hat{\gamma} X + \lambda I)^{-1}Y^T  \hat{\gamma}  X $$
 
+%%%%%%%%%%%%%%
 b)
 
+In part a) we discovered that centering the data is the same thing as solving the optimization problem for RLS with an unpenalized offset.
+Thus, using the same idea, we can re-write the weighted minimization problem (in question 2) in terms of weighted centered data and then use our solution for part 2a).
+
+$$min_{w \in \mathbb{R}^d, b \in \mathbb{R}} \sum_{i=1}^{n}\gamma_i \langle ( w, x_i\rangle_{\mathbb{R}^d} +b - y_i)^2 + \lambda ||w||_{\mathbb{R}^d}^2$$
+
+$$\frac{d}{db}\sum_{i=1}^{n}\gamma_i \langle ( w, x_i\rangle_{\mathbb{R}^d} +b - y_i)^2 + \lambda ||w||_{\mathbb{R}^d}^2 = 0$$
+
+$$b = \sum^{n}_{i=1} \gamma_i y_i- \sum^{n}_{i=1} \gamma_i \langle w, x_i\rangle $$
+
+$$b = \sum^{n}_{i=1} \gamma_i y_i-  \gamma_i \langle w, \sum^{n}_{i=1} x_i\rangle $$
+
+let the weighted means be defined as $\bar{y}_{\gamma} = \sum^{n}_{i=1} \gamma_i y_i$ and $\bar{x}_{\gamma} = \sum^{n}_{i=1} \gamma_i x_i$. Using that we can re-express the above as:
+
+$$b = \bar{y}_{\gamma}- \gamma_i \langle w, \bar{x}_{\gamma}\rangle $$
+
+$$ w^* = ((X^c)^T \hat{\gamma} X^c + \lambda I)^{-1}(Y^c)^T  \hat{\gamma}  X^c $$
+
+$$b= \bar{y}_\gamma -\langle w^*, \bar{x}_{\gamma} \rangle_{\mathbb{R}^d}$$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Problem 3
 \paragraph{Problem 3}
