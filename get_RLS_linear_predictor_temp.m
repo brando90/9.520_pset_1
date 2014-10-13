@@ -8,6 +8,7 @@ for current_lambda = lambdas
     current_avg_cv_error = get_avg_KCV_Error(X_train, Y_train, current_lambda, k);
     if current_avg_cv_error < smallest_avg_cv_error
         best_lambda = current_lambda;
+        smallest_avg_cv_error = current_avg_cv_error;
     end
 end
 lambda = best_lambda;
@@ -38,7 +39,9 @@ function [w] = train_RLS(X_train, Y_train, lambda)
 end
 
 function [error] = get_error(w, X_test, Y_test)
-    error = norm(Y_test-X_test*w, 2);
+    s = size(X_test);
+    n = s(1);
+    error = (1/n)*norm(Y_test-X_test*w, 2)^2;
 end
 
 function [X_cv_train, X_cv, Y_cv_train, Y_cv] = split_k(i, k, X_train, Y_train)
@@ -67,8 +70,4 @@ function [X_cv_train, X_cv, Y_cv_train, Y_cv] = split_k(i, k, X_train, Y_train)
         Y_cv_train = [Y_cv_train1 ; Y_cv_train2];
     end
 end
-
-
-
-
 
