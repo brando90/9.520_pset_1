@@ -142,7 +142,14 @@ $$b= \bar{y} -((X^c_{\gamma})^TX^c_{\gamma} + \lambda n I)^{-1}(X^c_{\gamma})^TY
 
 2c)
 
+One way that one could consider doing the weighting is to have higher weights to the class that has less examples and lower to the one that has more examples.
+This is because of the following intuition. Imagine that we have a lot of wrong examples for the same data point that we happened to have too many times.
+In this case the error contribution from this one point (or set of points) would be extremely big. 
+However, this might be undesirable because we already had an indication that we were wrong on it. i.e. the error on this data point my obscure our mistakes on other data points.
+Thus, to balance it out and make sure that our predictor doesn't get fixed in only fixing a few data points, we could distribute this weighting according the inverse proportion of data points.
+i.e. we can simply weight very similar data points less if we have them in high quantities, than different ones.
 
+However, the weighting could be a subtle and important thing to tune, because, one could argue that, if we get few examples of one class it might be because that is how the underlying distribution is, and we might be imposing to large of a prior on what we believe the distribution actually is. Thus, we have to do this with care to not out way what the data is actually telling us. For example, we should be careful not to accidentally weight outliers to high just because we had very few of them. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Problem 3
 \paragraph{Problem 3}
