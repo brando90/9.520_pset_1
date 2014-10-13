@@ -108,6 +108,8 @@ Thus, using the same idea, we can re-write the weighted minimization problem (in
 
 $$min_{w \in \mathbb{R}^d, b \in \mathbb{R}} \sum_{i=1}^{n}\gamma_i \langle ( w, x_i\rangle_{\mathbb{R}^d} +b - y_i)^2 + \lambda ||w||_{\mathbb{R}^d}^2$$
 
+For optimality, we need to satisfy the following constraint/equation for b:
+
 $$\frac{d}{db}\sum_{i=1}^{n}\gamma_i \langle ( w, x_i\rangle_{\mathbb{R}^d} +b - y_i)^2 + \lambda ||w||_{\mathbb{R}^d}^2 = 0$$
 
 $$b = \sum^{n}_{i=1} \gamma_i y_i- \sum^{n}_{i=1} \gamma_i \langle w, x_i\rangle $$
@@ -118,9 +120,25 @@ let the weighted means be defined as $\bar{y}_{\gamma} = \sum^{n}_{i=1} \gamma_i
 
 $$b = \bar{y}_{\gamma}- \gamma_i \langle w, \bar{x}_{\gamma}\rangle $$
 
-$$ w^* = ((X^c)^T \hat{\gamma} X^c + \lambda I)^{-1}(Y^c)^T  \hat{\gamma}  X^c $$
+Now, since this equation for b represents one of the constraints we must satisfy (i.e. the constraint saying to minimize b), we can just plug b back in to the original minimization problem and re-express it in terms of the weighted means $\bar{x}_{\gamma}$ and $\bar{y}_{\gamma}$. After that we can just express the solution using part 2a) Lets do it:
+
+$$min_{w \in \mathbb{R}^d } \sum_{i=1}^{n}\gamma_i ( \langle w, x_i\rangle_{\mathbb{R}^d} + \bar{y}_\gamma -\langle w^*, \bar{x}_{\gamma} \rangle_{\mathbb{R}^d} - y_i)^2 + \lambda ||w||_{\mathbb{R}^d}^2$$
+
+$$min_{w \in \mathbb{R}^d } \sum_{i=1}^{n}\gamma_i ( \langle w, x_i - \bar{x}_{\gamma}\rangle_{\mathbb{R}^d}  - \bar{y}_\gamma - y_i )^2 + \lambda ||w||_{\mathbb{R}^d}^2$$
+
+Let $\bar{x}_{\gamma} = x_i - \bar{x}_{\gamma}$ and let $\bar{y}_{\gamma} = y_i - \bar{y}_{\gamma}$. Also, let $X^{c}_{\gamma}$ and $Y^{c}_{\gamma}$ be the matrices containing the weighted centered data instead of the original inputs. Now lets express the minimization problem above with those:
+
+$$min_{w \in \mathbb{R}^d, b \in \mathbb{R}} \sum_{i=1}^{n} \gamma_i ( \langle w, \bar{x}_{\gamma}\rangle_{\mathbb{R}^d}  - (\bar{y}_{\gamma}) )^2 + \lambda ||w||_{\mathbb{R}^d}^2$$
+
+Thus, because the above is in the same format as the minimization problem in part 2a) but with the weighted mean instead of the input data points, we can just use its solution using the weighted centered mean data points. The solutions look as follow:
+
+$$ w^* = ((X^c_{\gamma})^T \hat{\gamma} X^c_{\gamma} + \lambda I)^{-1}(Y^c_{\gamma})^T  \hat{\gamma}  X^c_{\gamma} $$
 
 $$b= \bar{y}_\gamma -\langle w^*, \bar{x}_{\gamma} \rangle_{\mathbb{R}^d}$$
+
+or 
+
+$$b= \bar{y} -((X^c_{\gamma})^TX^c_{\gamma} + \lambda n I)^{-1}(X^c_{\gamma})^TY^c_{\gamma})^T \bar{x}$$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Problem 3
 \paragraph{Problem 3}
