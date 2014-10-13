@@ -32,7 +32,7 @@ end
 
 function [w] = train_RLS(X_train, Y_train, lambda)
     %w = inv(X_cv_train'*X_cv_train + lambda*n*I)*(X_cv_train'*Ytrain); %A\b === inv(A)*b
-    n, d = size(X_train);
+    [n, d] = size(X_train);
     I = eye(d);
     w = (X_train'*X_train + lambda*n*I)\(X_train'*Y_train);
 end
@@ -52,9 +52,9 @@ function [X_cv_train, X_cv, Y_cv_train, Y_cv] = split_k(i, k, X_train, Y_train)
         Y_cv_train = Y_train(i+validation_step:n,:);
     elseif i == n + 1 - validation_step
         X_cv = X_train(i:n,:);
-        X_cv_train = X_train(0:i-1,:);
+        X_cv_train = X_train(1:i-1, :);
         Y_cv = Y_train(i:n,:);
-        Y_cv_train = Y_train(0:i-1,:);
+        Y_cv_train = Y_train(1:i-1,:);
     else
         X_cv = X_train(i:i+validation_step - 1,:);
         X_cv_train1 = X_train(1:i-1,:);
