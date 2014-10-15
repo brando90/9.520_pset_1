@@ -332,7 +332,12 @@ c)
 $$ \sigma =  0.2147$$
 $$ \lambda = 0.0127$$
 
-$$ accuracy =  0.9100$$
+$$ accuracy_{train} =  1.0$$
+
+$$ accuracy_{test} =  0.9100$$
+
+This one had a better train error. That should have been obvious because the RBK has much more complexity and can fit basically any data set given perfectly (it can overfit without being careful).
+However, from the accuracy result, we can say that the data was probably highly dimensional/complicated, and the RBK was able to realize that much better and thats why its accuracy is better. It could have overfitted, but probably didn't because of the regularization.
 
 
 \end{document}
