@@ -71,3 +71,37 @@ function [X_cv_train, X_cv, Y_cv_train, Y_cv] = split_k(i, k, X_train, Y_train)
     end
 end
 
+function [accuracy] = get_accuracy(X_test, Y_test, w)
+s = size(X_test); %[n d]
+n = s(1);
+correct = 0;
+for i = [1:n]
+    x_test = X_test;
+    y_test = Y_test(i);
+    y_predict = sign(x_test*w);
+    if y_test == y_predict
+        correct = correct + 1;
+    end
+end
+accuracy = correct/n;
+end
+
+function [lambdas, k_fold_errors] = plot_error_lambdas(X_train, Y_train, lower, upper, step, k)
+%Returns the corresponding predictor w from RLS
+% 
+lambdas = lower: step: upper;
+s = size(lambdas);
+size_lambda = s(1);
+k_fold_errors = zeros(size_lambda, 1);
+i=1;
+for current_lambda = lambdas
+    current_avg_cv_error = get_avg_KCV_Error(X_train, Y_train, current_lambda, k);
+    k_fold_errors(i) = current_avg_cv_error; 
+    i=i+1;
+end
+plot(lambdas,k_fold_errors);
+end
+
+%Code I ran to get my values
+%[w, lambda] = get_RLS_linear_predictor_temp(Xtrain, Ytrain, 0, 60, 0.01, 10)
+

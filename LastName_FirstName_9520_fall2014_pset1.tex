@@ -251,17 +251,18 @@ or
 
 $$\frac{1}{2}log\left( \frac{p_{y|x}(1|x)}{1 - p_{y|x}(1|x)} \right) = f(x)$$
 
-c) When we apply a function that is monotonic to another function, then the value that minimizes it does not change. Said differently, if we have a function that preserves monotonicity (and thus preserves order), then the minimizer does not change. i.e. if $f(x) < f(y)$ and $g(x)$ is monotonic then $ g( f(x) ) < g( f(y) )$ and because of that the value of x that minimized $f(x)$ also minimizes $g(f(x))$.
+c) 
+$$ \frac{d}{df(x)}\mathbb{E}_{y|x}log(1 + e^{-yf(x)})$$
 
-The function $g(x) = x + 1$ is clearly monotonic. So is the function $h(x) = log(x)$. Now consider the following function:
+$$\sum_{y \in \{ -1, 1\}} \frac{-ye^{-yf(x)}}{1+e^{-yf(x)}}p_{y|x}(y|x) = 0$$
 
-$$h(g(e^{-yf(x)})) = log(g( e^{-yf(x)} )) = log(1 + e^{-yf(x)})$$
+$$\frac{-e^{-1f(x)}}{1+e^{-f(x)}}p_{y|x}(1|x) + \frac{e^{f(x)}}{1+e^{f(x)}}p_{y|x}(-1|x) = 0$$
 
-This time we are trying to minimize:
+$$\frac{e^{-1f(x)}}{1+e^{-f(x)}}p_{y|x}(1|x) = \frac{e^{f(x)}}{1+e^{f(x)}}p_{y|x}(-1|x)$$
 
-$$\mathcal{L}(-yf(x)) = (h(g(e^{-yf(x)}))$$
+$$e^{f(x)} p(-1|x) = p(1|x)$$
 
-From part b) we notice that its just a composite function of the exponential loss function using two monotonic functions. So without the need of further calculations its clear that the minimizer is the same as part b:
+$$f(x)  = log \left( \frac{ p(1|x) }{ p(-1|x) } \right) $$
 
 $$\frac{1}{2}log\left( \frac{p_{y|x}(1|x)}{p_{y|x}(-1|x)} \right) = f(x)$$
 
@@ -277,16 +278,62 @@ $$p_{y|x}(1|x) = \frac{f(x) + 1}{2}$$
 
 So the relation of the minimizer of the squared loss function to Bayes decision rule is:
 
-$$b(x) = sign(2\left( \frac{f(x) + 1}{2} \right) -1 ) = sign(f(x)) $$
+$$ \boxed{ b(x) = sign(2\left( \frac{f(x) + 1}{2} \right) -1 ) = sign(f(x))} $$
 
-Since b) and c) have the same minimizer, then their relation to Bayes decision rule is the same. First lets express $p_{y|x}(1|x)$ interns of f(x):
+First lets express $p_{y|x}(1|x)$ interns of f(x):
 
 $$p(1|x) = \frac{1}{1+e^{-f(x)} }$$
 
-$$ b(x) = sign \left( \frac{2}{1+e^{-f(x)}}   - 1 \right)$$
+Now lets do the appropriate substitutions to Bayes decision rule from the predictors in b and c. For the logistic loss its:
+
+$$ \boxed{b(x) = sign \left( \frac{2}{1+e^{-f(x)}}   - 1 \right)}$$
+
+For the exponential loss its:
+
+$$p(1|x) = \frac{1}{1+e^{-2f(x)} }$$
+
+Which gives for the exponential loss:
+
+
+$$ \boxed{ b(x) = sign \left( \frac{2}{1+e^{-2f(x)}}   - 1 \right) }$$
 
 \paragraph{Problem 5 (MATLAB)}
-Please write your analysis on Problem 5 here
+
+
+a)
+
+
+$$\lambda = 0.6900$$
+
+Training set:
+$$accuracy_{training  set} = 0.4700$$
+
+Test set:
+$$accuracy_{test  set} = 0.5500$$
+
+\begin{figure}
+\centering
+\includegraphics[width=0.3\textwidth]{plot_5a.jpg}
+\caption{\label{fig:k-fold}Lambdas vs k-fold error plot}
+\end{figure}
+
+b)
+
+$$\lambda =  0.0392$$
+
+Considering that my algorithm for part a search for a lambda between 0 to 60 (max eigenvalue of kernel matrix), I would say 0.0392 is not that far from 0.69. 
+
+$$ accuracy_{test}= 0.5500$$
+
+Furthermore, I got that their accuracy on the test set is the same! Show the little difference between a 0.0392 lambda and 0.6900.
+
+c)
+
+$$ \sigma =  0.2147$$
+$$ \lambda = 0.0127$$
+
+$$ accuracy =  0.9100$$
+
 
 \end{document}
 
